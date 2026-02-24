@@ -73,7 +73,7 @@
 /*---------------------------------------------------------------------------*/
 
 static int getMaxBinomial (int n);
-static DdHalfWord ** getMatrix (int rows, int cols);
+static DdHalfWord ** getMatrix (size_t rows, size_t cols);
 static void freeMatrix (DdHalfWord **matrix);
 static int getLevelKeys (DdManager *table, int l);
 static int ddShuffle (DdManager *table, DdHalfWord *permutation, int lower, int upper);
@@ -402,13 +402,13 @@ gcd(
 */
 static DdHalfWord **
 getMatrix(
-  int  rows /* number of rows */,
-  int  cols /* number of columns */)
+  size_t  rows /* number of rows */,
+  size_t  cols /* number of columns */)
 {
     DdHalfWord **matrix;
-    int i;
+    size_t i;
 
-    if (cols*rows == 0) return(NULL);
+    if (cols == 0 || rows == 0) return(NULL);
     matrix = ALLOC(DdHalfWord *, rows);
     if (matrix == NULL) return(NULL);
     matrix[0] = ALLOC(DdHalfWord, cols*rows);
