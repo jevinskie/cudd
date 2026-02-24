@@ -1654,8 +1654,11 @@ void
 defaultError(
   string message)
 {
+#ifdef __EXCEPTIONS
     throw std::logic_error(message);
-
+#else
+    std::abort();
+#endif
 } // defaultError
 
 
